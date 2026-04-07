@@ -13,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class GiftServiceImpl implements GiftService {
@@ -43,6 +45,7 @@ public class GiftServiceImpl implements GiftService {
         gift.setOccasion(dto.getOccasion());
         gift.setMinAge(dto.getMinAge());
         gift.setMaxAge(dto.getMaxAge());
+        gift.setTags(dto.getTags());
 
         Gift saved = giftRepository.save(gift);
         return convertToDTO(saved);
@@ -59,6 +62,7 @@ public class GiftServiceImpl implements GiftService {
         dto.setOccasion(gift.getOccasion());
         dto.setMinAge(gift.getMinAge());
         dto.setMaxAge(gift.getMaxAge());
+        dto.setTags(gift.getTags());
         return dto;
     }
 
@@ -133,6 +137,18 @@ public class GiftServiceImpl implements GiftService {
                 gift.getColour() != null &&
                 gift.getColour().equalsIgnoreCase(req.getColour())) {
             score += recommendationConfig.getColourWeight();
+        }
+
+        // TAG MATCHING
+        if (req.getPreferredTags() != null && gift.getTags() != null) {
+            Set<String> giftTagsLower = gift.getTags().stream()
+                    .map(String::toLowerCase)
+                    .collect(Collectors.toSet());
+            for (String tag : req.getPreferredTags()) {
+                if (giftTagsLower.contains(tag.toLowerCase())) {
+                    score += recommendationConfig.getTagWeight();
+                }
+            }
         }
 
         return score;

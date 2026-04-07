@@ -1,6 +1,7 @@
 package com.giftapp.backend.dto;
 
 import lombok.Data;
+import java.util.Set;
 
 @Data
 public class GiftDTO {
@@ -14,4 +15,5 @@ public class GiftDTO {
     private String occasion;   // BIRTHDAY / ANNIVERSARY
     private Integer minAge;
     private Integer maxAge;
+    private Set<String> tags;
 }

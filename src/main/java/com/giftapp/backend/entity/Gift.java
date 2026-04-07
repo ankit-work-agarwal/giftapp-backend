@@ -2,6 +2,7 @@ package com.giftapp.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import java.util.Set;
 
 @Entity
 @Data
@@ -25,4 +26,7 @@ public class Gift {
     private String occasion;   // BIRTHDAY / ANNIVERSARY
     private Integer minAge;
     private Integer maxAge;
+
+    @ElementCollection
+    private Set<String> tags;
 }

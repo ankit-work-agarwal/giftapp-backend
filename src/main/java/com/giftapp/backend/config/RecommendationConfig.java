@@ -15,4 +15,5 @@ public class RecommendationConfig {
     private int budgetWeight;
     private int colourWeight;
     private int minScore;
+    private int tagWeight;
 }

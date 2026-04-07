@@ -1,6 +1,7 @@
 package com.giftapp.backend.dto;
 
 import lombok.Data;
+import java.util.Set;
 
 @Data
 public class RecommendationRequest {
@@ -10,4 +11,5 @@ public class RecommendationRequest {
     private String occasion;
     private Double budget;
     private String colour;
+    private Set<String> preferredTags;
 }
