@@ -9,7 +9,7 @@ public class GiftDTO {
     private String name;
     private String category;
     private String colour;
-    private double price;
+    private Double price;
     private String gender;     // MALE / FEMALE / UNISEX
     private String occasion;   // BIRTHDAY / ANNIVERSARY
     private Integer minAge;

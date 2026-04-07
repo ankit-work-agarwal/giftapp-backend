@@ -20,7 +20,7 @@ public class Gift {
     private String name;
     private String category;    // e.g. FASHION, ELECTRONICS
     private String colour;
-    private double price;
+    private Double price;
     private String gender;     // MALE / FEMALE / UNISEX
     private String occasion;   // BIRTHDAY / ANNIVERSARY
     private Integer minAge;

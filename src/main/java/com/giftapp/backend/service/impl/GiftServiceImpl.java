@@ -107,25 +107,33 @@ public class GiftServiceImpl implements GiftService {
         int score = 0;
 
         // Gender
-        if (gift.getGender().equalsIgnoreCase(req.getGender())) {
-            score += recommendationConfig.getGenderWeight();
-        } else if (gift.getGender().equalsIgnoreCase("UNISEX")) {
-            score += recommendationConfig.getUnisexWeight();
+        if (gift.getGender() != null && req.getGender() != null) {
+            if (gift.getGender().equalsIgnoreCase(req.getGender())) {
+                score += recommendationConfig.getGenderWeight();
+            } else if (gift.getGender().equalsIgnoreCase("UNISEX")) {
+                score += recommendationConfig.getUnisexWeight();
+            }
         }
 
         // Occasion
-        if (gift.getOccasion().equalsIgnoreCase(req.getOccasion())) {
-            score += recommendationConfig.getOccasionWeight();
+        if (gift.getOccasion() != null && req.getOccasion() != null) {
+            if (gift.getOccasion().equalsIgnoreCase(req.getOccasion())) {
+                score += recommendationConfig.getOccasionWeight();
+            }
         }
 
         // Age
-        if (req.getAge() >= gift.getMinAge() && req.getAge() <= gift.getMaxAge()) {
-            score += recommendationConfig.getAgeWeight();
+        if (gift.getMinAge() != null && gift.getMaxAge() != null) {
+            if (req.getAge() >= gift.getMinAge() && req.getAge() <= gift.getMaxAge()) {
+                score += recommendationConfig.getAgeWeight();
+            }
         }
 
         // Budget
-        if (req.getBudget() != null && gift.getPrice() <= req.getBudget()) {
-            score += recommendationConfig.getBudgetWeight();
+        if (gift.getPrice() != null) {
+            if (req.getBudget() != null && gift.getPrice() <= req.getBudget()) {
+                score += recommendationConfig.getBudgetWeight();
+            }
         }
 
         // Colour
