@@ -33,7 +33,7 @@ public class AuthServiceImpl implements AuthService {
         User user = new User();
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole("USER"); // default role
+        user.setRole(request.getRole() != null ? request.getRole() : "USER"); // default role: USER
 
         userRepository.save(user);
 
